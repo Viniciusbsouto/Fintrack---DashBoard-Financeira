@@ -1,8 +1,7 @@
 const App = () => {
-  const name = 'Vinicius';
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1 className="my-2 p-5 text-red-500">Hello World</h1>
     </div>
   );
 };

@@ -1,4 +1,8 @@
-@font-face {
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+font-face {
   font-family: 'Nunito';
   src: url('/src/assets/fonts/Nunito-Black.ttf') format('truetype');
   font-weight: 900;
