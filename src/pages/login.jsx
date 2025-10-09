@@ -51,10 +51,7 @@ const LoginPage = () => {
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3">
       <Form {...methods}>
-        <form
-          onSubmit={methods.handleSubmit(handleSubmit)}
-          className="w-full max-w-sm"
-        >
+        <form onSubmit={methods.handleSubmit(handleSubmit)}>
           <Card className="w-[500px]">
             <CardHeader>
               <CardTitle>Faça login</CardTitle>
@@ -101,7 +98,7 @@ const LoginPage = () => {
         </form>
       </Form>
       <div className="flex items-center justify-center">
-        <p className="mr-2">Ainda não possui uma conta?</p>
+        <p>Ainda não possui uma conta?</p>
         <Button variant="link" asChild>
           <Link to="/signup">Crie agora</Link>
         </Button>

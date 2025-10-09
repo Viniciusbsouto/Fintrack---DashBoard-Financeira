@@ -184,7 +184,7 @@ const SignUpPage = () => {
         </form>
       </Form>
       <div className="flex items-center justify-center">
-        <p className="mr-2">Já tem uma conta?</p>
+        <p>Já possui uma conta?</p>
         <Button variant="link" asChild>
           <Link to="/login">Faça login</Link>
         </Button>
