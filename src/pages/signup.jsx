@@ -153,6 +153,7 @@ const SignUpPage = () => {
                   <FormItem className="items-top flex space-x-2 space-y-0">
                     <FormControl>
                       <Checkbox
+                        id="terms"
                         checked={field.value}
                         onCheckedChange={field.onChange}
                       />
