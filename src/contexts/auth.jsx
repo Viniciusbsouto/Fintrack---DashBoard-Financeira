@@ -12,6 +12,7 @@ export const AuthContext = createContext({
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  // Signup mutation
   const signupMutation = useMutation({
     mutationKey: ['signup'],
     mutationFn: async (variables) => {
@@ -24,6 +25,7 @@ export const AuthContextProvider = ({ children }) => {
       return response.data;
     },
   });
+  // Signup function
   const signup = (data) => {
     signupMutation.mutate(data, {
       onSuccess: (createdUser) => {
@@ -39,6 +41,37 @@ export const AuthContextProvider = ({ children }) => {
       },
     });
   };
+
+  // Login Mutation
+  const loginMutation = useMutation({
+    mutationKey: ['login'],
+    mutationFn: async (data) => {
+      const response = await api.post('/users/login', {
+        email: data.email,
+        password: data.password,
+      });
+      return response.data;
+    },
+  });
+
+  // Login Function
+  const login = (data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (loggedUser) => {
+        const accessToken = loggedUser.tokens.accessToken;
+        const refreshToken = loggedUser.tokens.refreshToken;
+        setUser(loggedUser);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        toast.success('Login realizado com sucesso!');
+      },
+      onError: () => {
+        toast.error('Erro ao fazer login. Verifique suas credenciais.');
+      },
+    });
+  };
+
+  // Check for existing tokens on local storage
 
   useEffect(() => {
     const init = async () => {
@@ -65,9 +98,9 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        user: user,
-        login: () => {},
-        signup: signup,
+        user,
+        login,
+        signup,
       }}
     >
       {children}
