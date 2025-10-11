@@ -9,6 +9,7 @@ export const AuthContext = createContext({
   isInitializing: true,
   login: () => {},
   signup: () => {},
+  signOut: () => {},
 });
 
 export const useAuthContext = () => useContext(AuthContext);
@@ -82,6 +83,13 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  // SignOut Function
+
+  const signOut = () => {
+    setUser(null);
+    removeTokens();
+  };
+
   // Check for existing tokens on local storage
 
   useEffect(() => {
@@ -117,6 +125,7 @@ export const AuthContextProvider = ({ children }) => {
         login,
         signup,
         isInitializing,
+        signOut,
       }}
     >
       {children}
