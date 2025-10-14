@@ -1,6 +1,9 @@
+import { PlusIcon } from 'lucide-react';
 import { Navigate } from 'react-router';
 
+import DateSelection from '@/components/date-selection';
 import Header from '@/components/header';
+import { Button } from '@/components/ui/button';
 import { useAuthContext } from '@/contexts/auth';
 
 const HomePage = () => {
@@ -9,7 +12,25 @@ const HomePage = () => {
   if (!user) {
     return <Navigate to="/login" />;
   }
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <div className="p-8">
+        {/* Parte do Topo */}
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Dashboard</h2>
+          <div className="flex items-center gap-2">
+            <DateSelection />
+            <Button>
+              <PlusIcon />
+              Nova Transação
+            </Button>
+            {/* Seletor de Data e Botão de Nova Transação */}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;
