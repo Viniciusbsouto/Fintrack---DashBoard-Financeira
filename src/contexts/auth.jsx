@@ -105,7 +105,6 @@ export const AuthContextProvider = ({ children }) => {
         const response = await protectedApi.get('/users/me');
         setUser(response.data);
       } catch (error) {
-        removeTokens();
         console.log(error);
         setUser(null);
       } finally {
