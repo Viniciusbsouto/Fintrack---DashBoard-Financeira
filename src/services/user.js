@@ -38,4 +38,13 @@ export const UserService = {
       lastName: response.data.last_name,
     };
   },
+  getBalance: async (input) => {
+    const queryParam = new URLSearchParams();
+    queryParam.set('from', input.from);
+    queryParam.set('to', input.to);
+    const response = await protectedApi.get(
+      `/users/me/balance?${queryParam.toString()}`
+    );
+    return response.data;
+  },
 };
