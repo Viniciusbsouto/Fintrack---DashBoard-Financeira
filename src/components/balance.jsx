@@ -24,7 +24,6 @@ const Balance = () => {
     },
   });
 
-  console.log(data);
   return (
     <div className="grid grid-cols-2 grid-rows-2 gap-6">
       <BalanceItem label="Saldo" amount={data?.balance} icon={<WalletIcon />} />
