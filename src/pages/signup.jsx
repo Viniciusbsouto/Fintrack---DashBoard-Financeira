@@ -96,7 +96,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite seu nome" {...field} />
+                      <Input
+                        placeholder="Digite seu nome"
+                        {...field}
+                        autoComplete="given-name"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -110,7 +114,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Sobrenome</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite seu sobrenome" {...field} />
+                      <Input
+                        placeholder="Digite seu sobrenome"
+                        {...field}
+                        autoComplete="family-name"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -124,7 +132,11 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite seu email" {...field} />
+                      <Input
+                        placeholder="Digite seu email"
+                        {...field}
+                        autoComplete="email"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

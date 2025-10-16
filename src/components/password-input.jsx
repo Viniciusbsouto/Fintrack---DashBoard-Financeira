@@ -15,6 +15,7 @@ const PasswordInput = forwardRef(
           placeholder={placeholder}
           ref={ref}
           {...props}
+          autoComplete="current-password"
         />
 
         <Button
