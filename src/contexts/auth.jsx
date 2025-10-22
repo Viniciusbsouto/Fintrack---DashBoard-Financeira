@@ -34,17 +34,16 @@ export const AuthContextProvider = ({ children }) => {
   // Signup mutation
   const signupMutation = useSignup();
   // Signup function
-  const signup = (data) => {
-    signupMutation.mutate(data, {
-      onSuccess: (createdUser) => {
-        setUser(createdUser);
-        setTokens(createdUser.tokens);
-        toast.success('Conta criada com sucesso!');
-      },
-      onError: () => {
-        toast.error('Erro ao criar conta. Tente novamente.');
-      },
-    });
+  const signup = async (data) => {
+    try {
+      const createdUser = await signupMutation.mutateAsync(data);
+      setUser(createdUser);
+      setTokens(createdUser.tokens);
+      toast.success('Conta criada com sucesso!');
+    } catch (error) {
+      toast.error('Erro ao criar conta. Tente novamente.');
+      console.log(error);
+    }
   };
 
   // Login Mutation
@@ -58,6 +57,7 @@ export const AuthContextProvider = ({ children }) => {
       setTokens(loggedUser.tokens);
       toast.success('Login realizado com sucesso!');
     } catch (error) {
+      toast.error('Erro ao realizar login');
       console.log(error);
     }
   };
