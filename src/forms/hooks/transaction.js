@@ -1,9 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { useCreateTransaction } from '@/api/hooks/transaction';
+import {
+  useCreateTransaction,
+  useEditTransaction,
+} from '@/api/hooks/transaction';
 
-import { createTransactionFormSchema } from '../schemas/transaction';
+import {
+  createTransactionFormSchema,
+  editTransactionFormSchema,
+} from '../schemas/transaction';
 
 export const useCreateTransactionForm = ({ onSuccess, onError }) => {
   const { mutateAsync: createTransaction } = useCreateTransaction();
@@ -27,5 +33,33 @@ export const useCreateTransactionForm = ({ onSuccess, onError }) => {
       onError();
     }
   };
+  return { form, onSubmit };
+};
+
+export const useEditTransactionForm = ({ transaction, onSuccess, onError }) => {
+  const { mutateAsync: updateTransaction } = useEditTransaction();
+  const form = useForm({
+    resolver: zodResolver(editTransactionFormSchema),
+    defaultValues: {
+      id: transaction?.id,
+      name: transaction?.name,
+      amount: parseFloat(transaction?.amount),
+      date: transaction?.date,
+      type: transaction?.type,
+    },
+
+    shouldUnregister: true,
+  });
+
+  const onSubmit = async (data) => {
+    await updateTransaction(data);
+    try {
+      onSuccess();
+    } catch (error) {
+      console.log(error);
+      onError();
+    }
+  };
+
   return { form, onSubmit };
 };
